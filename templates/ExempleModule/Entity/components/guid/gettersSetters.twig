@@ -1,0 +1,9 @@
+private function get{{ capitalizedattributeName }}(): ?string{
+    return $this->{{ attributeName }};
+}
+
+private function set{{ capitalizedattributeName }}(?string ${{ attributeName }}): static{
+    $this->{{ attributeName }} = ${{ attributeName }};
+
+    return $this;
+}

@@ -1,0 +1,25 @@
+<?php
+namespace {{ namespace }};
+
+use App\Controller\BootController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use App\Module\{{ moduleName }}\Service\SiteMapService;
+
+class {{ className }} extends BootController
+{
+    public function __construct(
+        protected SiteMapService $siteMapService
+    ){}
+
+    #[Route('/{{ route }}', name: 'app_{{ route }}', methods: ['GET'])]
+    public function index(): Response
+    {
+        $this->addBreadcrumb('Home', '/');
+        $this->addBreadcrumb('{{ route }}', null);
+
+        return $this->render('index.html.twig', [
+            'controllerName' => '{{ className }}',
+        ]);
+    }
+}

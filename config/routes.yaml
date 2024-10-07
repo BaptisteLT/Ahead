@@ -1,0 +1,10 @@
+module:
+    resource: ../src/Module/
+    type: attribute
+    #prefix: /{locale}
+
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute

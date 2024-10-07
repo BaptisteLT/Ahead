@@ -1,0 +1,28 @@
+<?php
+namespace App\Module\{{ moduleName }}\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+{% if metaSeo %}
+use App\Entity\Trait\MetaSeoTrait;
+use App\Entity\Trait\CreateUpdateTrait;
+{% endif %}
+use App\Module\{{ moduleName }}\Repository\{{ entityName }}Repository;
+
+#[ORM\Entity(repositoryClass: {{ entityName }}Repository::class)]
+class {{ entityName }}
+{
+{% if metaSeo %}
+    use MetaSeoTrait;
+{% endif %}
+    use CreateUpdateTrait;
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+}

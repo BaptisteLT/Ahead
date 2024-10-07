@@ -1,0 +1,41 @@
+@use 'sass:math' as math;
+// Define base font size (which shouldn't be touched)
+$base-font-size: 16px;
+
+// Define a function to convert px to rem
+@function pixelsToRemConverter($px) {
+    @return #{math.div($px, $base-font-size)}rem;
+}
+
+// Font sizes
+body {
+  font-size: pixelsToRemConverter(16px); // Base font size for body and inline elements
+}
+
+h1 {
+  font-size: pixelsToRemConverter(32px); // 32px = 2rem
+}
+
+h2 {
+  font-size: pixelsToRemConverter(28px); // 28px = 1.75rem
+}
+
+h3 {
+  font-size: pixelsToRemConverter(24px); // 24px = 1.5rem
+}
+
+h4 {
+  font-size: pixelsToRemConverter(20px); // 20px = 1.25rem
+}
+
+p {
+  font-size: pixelsToRemConverter(16px); // 16px = 1rem
+}
+
+small {
+  font-size: pixelsToRemConverter(12px); // 12px = 0.75rem
+}
+
+strong {
+  font-weight: bold; // Keep strong text bold
+}

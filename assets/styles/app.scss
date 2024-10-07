@@ -1,0 +1,11 @@
+@use 'common/fonts' as fonts; // 'fonts' is the namespace
+@use 'common/vars' as vars;
+
+html{
+    font-size: fonts.$base-font-size;
+}
+
+body {
+    background-color: vars.$my_custom_color;
+    font-family: "Roboto Mono", monospace;
+}

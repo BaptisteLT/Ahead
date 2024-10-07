@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Symfony App{% endblock %}</title>
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content={% block meta_robots %}"index, follow"{% endblock %}>
+    
+   
+    {#TODO plutot générer ça coté back#}
+    {# Meta title for OG and Twitter #}
+    {% if meta_title is defined and meta_title is not empty %}
+        <meta property="og:title" content="{{ meta_title }}">
+        <meta property="twitter:title" content="{{ meta_title }}">
+    {% endif %}
+
+    {# Meta description for OG and Twitter #}
+    {% if meta_description is defined and meta_description is not empty %}
+        <meta property="og:description" content="{{ meta_description }}">
+        <meta property="twitter:description" content="{{ meta_description }}">
+    {% endif %}
+
+    {# Meta image for OG and Twitter #}
+    {% if meta_image_url is defined and meta_image_url is not empty %}
+        <meta property="og:image" content="{{ meta_image_url }}"> {#TODO resize image to 1200×630 pixels for Open Graph #}
+        <meta property="twitter:image" content="{{ meta_image_url }}"> {#TODO resize image to 1200×675 pixels for Open Graph #}
+    {% endif %}
+
+    {% if meta_url is defined and meta_url is not empty %}
+        <meta property="og:url" content="{{ meta_url }}">
+        <meta property="twitter:url" content="{{ meta_url }}">
+    {% endif %}
+
+
+    {% if meta_type is defined and meta_type is not empty %}
+        <meta property="og:type" content="{{ meta_type }}">
+    {% endif %}
+
+    {#{% set meta_url = app.request.scheme ~ '://' ~ app.request.host ~ app.request.requestUri %}
+    <meta property="og:url" content="{{ meta_url }}">#}
+
+    
+    {% if meta_image is defined and meta_image is not empty %}
+        <meta property="twitter:card" content="summary_large_image">
+    {% elseif meta_title is defined and meta_title is not empty %}
+        <meta property="twitter:image" content="summary">
+    {% endif %}
+
+    {#og:locale TODO if translation#}
+    {#<meta http-equiv=”Content-Language” content=”en-us”> TODO if translation#}
+    {#<link rel="canonical" href="https://example.com/best-coffee-beans"> TODO: if pagination#}
+
+
+    {% if app.request.server.get('GOOGLE_FONTS_URL') is defined and app.request.server.get('GOOGLE_FONTS_URL') is not empty %}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="{{ app.request.server.get('GOOGLE_FONTS_URL') }}" rel="stylesheet">
+    {% endif %}
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <h1>{% block header %}Header content goes here{% endblock %}</h1>
+    </header>
+
+    {% block breadcrumbs %}
+        <nav>
+            {% if breadcrumbs() is not empty %}
+                {# This is where breadcrumbs will be displayed #}
+                {% include 'components/_breadcrumbs.html.twig' %}
+            {% endif %}
+        </nav>
+    {% endblock %}
+
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        {% block footer %}Footer content goes here{% endblock %}
+    </footer>
+</body>
+</html>
