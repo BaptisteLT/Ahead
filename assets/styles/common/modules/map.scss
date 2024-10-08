@@ -1,0 +1,28 @@
+@use '../vars' as vars;
+
+.map-image{
+    .main-img-wrapper{
+        position: relative;
+        img{
+            max-height: 380px;
+            object-fit: cover;
+            width: 100%;
+        }
+        h1{
+            position: absolute;
+            color: vars.$white;
+            font-weight: bold;
+            font-family: "Open sans", sans-serif;
+            top: 50%;
+            left: 50%; 
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+        }
+    }
+}
+
+.map{
+    .map-svg{
+        width: 100%;
+    }
+}

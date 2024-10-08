@@ -1,0 +1,62 @@
+@use '../vars' as vars;
+
+.main-image-wrapper{
+    position: relative;
+    .map-search-button{
+        text-decoration: none;
+        position: absolute;
+        top: 50%;
+        left: 50%; 
+        transform: translate(-50%, -50%);
+        background-color: vars.$white;
+        border: 1px solid vars.$border_color;
+        border-radius: 2rem;
+        padding: 10px 60px;
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: vars.$black;
+        .loop-icon{
+            max-width: 28px;
+            transform: rotate(90deg);
+            margin-left: 10px;
+        }
+    }
+    .main-image{
+        max-height: 680px;
+        object-fit: cover;
+        object-position: 50% 45%;
+    }
+}
+
+.speech-wrapper{
+    display: flex;
+    gap: 26px;
+    @media screen and (max-width: 1200px){
+        flex-direction: column;
+    }
+    h2{
+        color: vars.$white;
+    }
+    .speech{
+        padding: 40px 30px 30px 30px;
+        border-radius: 8px;
+    }
+    .speech-left{
+        background-color: vars.$blue_2;
+        color: vars.$white;
+    }
+    .speech-right{
+        border: 1px solid vars.$border_color;
+        h2{
+            color: vars.$black;
+        }
+    }
+}
+.speech_image{
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    img{
+        transform: scale(1.06);
+    }
+}

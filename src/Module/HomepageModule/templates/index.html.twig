@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <section id="main">
+        <div class="main-image-wrapper">
+            <a class="map-search-button" href="{{ path('app_map') }}">Voir la carte<img class="loop-icon" src="{{ asset('icons/loop.png') }}" alt="icône de loupe"></a>
+            <img class="w-100 main-image" src="{{ asset('images/main-image-doctor.webp') }}" alt="Docteur dans son cabinet médical, habillé en blouse blanche, les mains dans le poches et de face.">
+        </div>
+    </section>
+
+    <section id="speech">
+
+    </section>
+        <div class="container">
+            <h1 class="mt-5 mb-5">Protégez les autres en déclarant vos symtômes</h1>
+            <div class="speech-wrapper">
+                <div class="speech speech-left">
+                    <h2>Protégez vous des maladies</h2>
+                    <div class="row">
+                        <div class="col-8">
+                            <p>
+                                Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid" src="{{ asset('images/protect_yourself.png') }}" alt="Image 2d d'une femme avec la main sur le coeur">
+                        </div>
+                        <div class="col-12">
+                            <a href="{{ path('app_map') }}" class="mt-3 button-large button-large-white">Voir la carte</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speech speech-right">
+                    <h2>Protégez les autres</h2>
+                    <div class="row">
+                        <div class="col-8">
+                            <p>
+                                Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum.
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid" src="{{ asset('images/protect_others.png') }}" alt="Image 2d d'une femme avec la main sur le coeur">
+                        </div>
+                        <div class="col-12">
+                            <a href="{{ path('app_form') }}" class="mt-3 button-large button-large-blue">Déclarer mes symptômes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="speech_image mt-5 mb-5">
+                <img class="img-fluid" src="{{ asset('images/doctor_tablet.webp') }}" alt="Médecin tenant une tablette montrant notre site web." />
+            </div>
+        </div>
+    <section>
+{% endblock %}
+

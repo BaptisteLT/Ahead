@@ -1,11 +1,40 @@
 @use 'common/fonts' as fonts; // 'fonts' is the namespace
 @use 'common/vars' as vars;
+@use 'common/modules/base.scss';
+@use 'common/modules/form.scss';
+@use 'common/modules/map.scss';
+@use 'common/_header.scss';
+@use 'common/_footer.scss';
 
 html{
     font-size: fonts.$base-font-size;
 }
 
 body {
-    background-color: vars.$my_custom_color;
-    font-family: "Roboto Mono", monospace;
+    background-color: vars.$white;
+    font-family: "Nunito", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, span, a {
+    color: vars.$black; /* Set the text color to red */
+}
+
+.button-large{
+    width: 100%;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.6rem;
+}
+.button-large-white{
+    color: vars.$black;
+    background-color: vars.$white;
+}
+
+.button-large-blue{
+    color: vars.$white;
+    background-color: vars.$blue_2;
 }

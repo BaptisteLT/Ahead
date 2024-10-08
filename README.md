@@ -3,3 +3,4 @@
 2) Add the font URL to a .env variable called GOOGLE_FONTS_URL
 3) In app.scss, change the font-family in the body (don't forget to run npm run watch)
 
+TODO: diviser le nombre de maladies par le nombre d'habitants

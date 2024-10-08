@@ -67,25 +67,24 @@
     {% endblock %}
 </head>
 <body>
-    <header>
-        <h1>{% block header %}Header content goes here{% endblock %}</h1>
-    </header>
+    {% include 'components/_header.html.twig' %}
+    
 
     {% block breadcrumbs %}
-        <nav>
-            {% if breadcrumbs() is not empty %}
-                {# This is where breadcrumbs will be displayed #}
-                {% include 'components/_breadcrumbs.html.twig' %}
-            {% endif %}
-        </nav>
+        <div class="container">
+            <nav>
+                {% if breadcrumbs() is not empty %}
+                    {# This is where breadcrumbs will be displayed #}
+                    {% include 'components/_breadcrumbs.html.twig' %}
+                {% endif %}
+            </nav>
+        </div>
     {% endblock %}
 
     <div>
         {% block content %}{% endblock %}
     </div>
 
-    <footer>
-        {% block footer %}Footer content goes here{% endblock %}
-    </footer>
+    {% include 'components/_footer.html.twig' %}
 </body>
 </html>

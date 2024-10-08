@@ -246,7 +246,7 @@ class GenerateModuleCommand extends Command
         return strtolower($withHyphens);
     }
 
-    private function askIfEntityNeeded(): string
+    private function askIfEntityNeeded(): ?string
     {
         // Ask if the user needs a entity
         $question = new ConfirmationQuestion('Do you need an Entity in the module? (yes/no): ', false);

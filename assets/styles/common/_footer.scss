@@ -1,0 +1,36 @@
+@use './vars' as vars;
+
+footer{
+    .footer_top{
+        background-color: vars.$blue_1;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        .footer-row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            h3{
+                color: vars.$white;
+            }
+            .footer-col{
+                ul{
+                    color: vars.$white;
+                    margin: 0; 
+                    padding: 0;
+                    list-style: none;
+                    font-size: 1.4rem;
+                }
+            }
+        }
+    }
+    .footer_bottom{
+        background-color: vars.$blue_2;
+        padding: 14px 0;
+    }
+}
+
+.footer_bottom{
+    color: vars.$white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
