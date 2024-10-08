@@ -22,15 +22,12 @@ class MapController extends BootController
         $regions = $regionRepository->findAll();
 
         foreach($regions as $region){
-            // Define your parameters
-            $latitude = $region->getLatitude();
-            $longitude = $region->getLongitude();
+            // Define svg parameters
             $svgWidth = 1000;
             $svgHeight = 960;
-           
             // Calculate SVG coordinates
-            $x = (($longitude + 5.1) / (9.5 + 5.1)) * $svgWidth;
-            $y = $svgHeight - (($latitude - 41.3) / (51.1 - 41.3)) * $svgHeight;
+            $x = (($region->getLongitude() + 5.1) / (9.5 + 5.1)) * $svgWidth;
+            $y = $svgHeight - (($region->getLatitude() - 41.3) / (51.1 - 41.3)) * $svgHeight;
             $region->setSvgY($y);
             $region->setSvgX($x);
         }

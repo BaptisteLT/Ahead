@@ -47,6 +47,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Test::class, inversedBy: 'users')]
     private Collection $manyToMany;
 
+    #[ORM\Column]
+    private bool $isVerified = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $OAuth2ProviderName = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $OAuth2ProviderId = null;
+
+
     public function __construct()
     {
         $this->reports = new ArrayCollection();
@@ -103,6 +113,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getOAuth2ProviderName(): ?string
+    {
+        return $this->OAuth2ProviderName;
+    }
+
+    public function setOAuth2ProviderName(?string $OAuth2ProviderName): static
+    {
+        $this->OAuth2ProviderName = $OAuth2ProviderName;
+
+        return $this;
+    }
+
+    public function getOAuth2ProviderId(): ?string
+    {
+        return $this->OAuth2ProviderId;
+    }
+
+    public function setOAuth2ProviderId(?string $OAuth2ProviderId): static
+    {
+        $this->OAuth2ProviderId = $OAuth2ProviderId;
+
+        return $this;
+    }
+
 
     /**
      * @see PasswordAuthenticatedUserInterface
