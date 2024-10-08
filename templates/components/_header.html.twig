@@ -19,10 +19,12 @@
                         <a class="nav-link {{ path('app_form') == url ? 'nav-active' : '' }}" href="{{ path('app_form') }}">Déclarer des symptômes</a>
                     </li>
                 </ul>
-                <a href="{{ path('connect_google_start') }}" class="oauth_button">
-                    <img src="{{ asset('icons/google-logo.png') }}" alt="Logo google">
-                    <span>Se connecter avec Google</span>
-                </a>
+                {% if app.user is null %}
+                    <a href="{{ path('connect_google_start') }}" class="oauth_button">
+                        <img src="{{ asset('icons/google-logo.png') }}" alt="Logo google">
+                        <span>Se connecter avec Google</span>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </nav>
