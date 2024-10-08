@@ -16,17 +16,30 @@ class Symptoms
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $name = null;
+
     /**
      * @var Collection<int, Report>
      */
     #[ORM\ManyToMany(targetEntity: Report::class, mappedBy: 'symptoms')]
     private Collection $reports;
     
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): static
+    {
+        $this->name = $name;
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
     
     /**
      * @return Collection<int, Test>

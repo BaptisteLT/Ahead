@@ -1,40 +1,43 @@
 @use './vars' as vars;
 
-.navbar{
-    height: 125px;
-    padding: 0 20px;
-    .navbar-brand{
-        color: vars.$blue_1;
-        font-size: 4.7rem;
-        font-weight: bold;
-        font-family: "Open Sans", sans-serif;
-    }
-    ul{
-        align-items: center;
-        li{
-            font-size: 1.6rem;
-            color: vars.$black;
-            &:hover{
-                a{
-                    color: vars.$blue_1;
-                    transform: scale(1.01);
-                }
-
-            }
-            a{
+header{
+    height: 100%;
+    .navbar{
+        height: 125px;
+        padding: 0 20px;
+        .navbar-brand{
+            color: vars.$blue_1;
+            font-size: 4.7rem;
+            font-weight: bold;
+            font-family: "Open Sans", sans-serif;
+        }
+        ul{
+            align-items: center;
+            li{
+                font-size: 1.6rem;
                 color: vars.$black;
-            }
-            .nav-active{
-                color: vars.$blue_1;
+                &:hover{
+                    a{
+                        color: vars.$blue_1;
+                        transform: scale(1.01);
+                    }
+    
+                }
+                a{
+                    color: vars.$black;
+                }
+                .nav-active{
+                    color: vars.$blue_1;
+                }
             }
         }
-    }
-    .dot-separator{
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        background-color: vars.$black;
-        border-radius: 50%;
-        margin: 0 10px;
+        .dot-separator{
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: vars.$black;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
     }
 }

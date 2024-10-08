@@ -4,3 +4,4 @@
 3) In app.scss, change the font-family in the body (don't forget to run npm run watch)
 
 TODO: diviser le nombre de maladies par le nombre d'habitants
+TODO: pour la recherche des maladies et symptômes, ajouter des synonymes pour simplifier la recherche (ex, maux de tête, mal de tête, douleur tête, etc)

@@ -243,8 +243,8 @@ class MapFixtures extends Fixture
             
             foreach($region['departments'] as $department){
                 $departmentEntity = new Department();
-                $departmentEntity->setNumber($department['name'])
-                           ->setName((int)$department['number'])
+                $departmentEntity->setNumber((int)$department['number'])
+                           ->setName($department['name'])
                            ->setRegion($regionEntity);
                 $manager->persist($departmentEntity);
             }
