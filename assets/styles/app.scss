@@ -1,6 +1,7 @@
 @use 'common/fonts' as fonts; // 'fonts' is the namespace
 @use 'common/vars' as vars;
 @use 'common/modules/base.scss';
+@use 'common/modules/mapform.scss';
 @use 'common/modules/form.scss';
 @use 'common/modules/map.scss';
 @use 'common/_header.scss';

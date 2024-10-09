@@ -1,26 +1,20 @@
 import { Controller } from '@hotwired/stimulus';
-import flatpickr from "flatpickr";
-import "flatpickr/dist/flatpickr.css"; // Import the CSS for styling
 
 export default class extends Controller {
 
-    dateFrom = null;
-    dateTo = null;
-    diseaseId = null;
+    step = 1;
     symptoms = [];
-
-    initialize() {
-        this._onPreConnect = this._onPreConnect.bind(this);
-        this._onConnect = this._onConnect.bind(this);
-    }
 
     connect() {
         this.element.addEventListener('autocomplete:pre-connect', this._onPreConnect);
         this.element.addEventListener('autocomplete:connect', this._onConnect);
 
-        this.setFiltersListeners();
-        this.setDatePickers();
-        this.doSearch();
+        this.fetchForm();
+    }
+
+    initialize() {
+        this._onPreConnect = this._onPreConnect.bind(this);
+        this._onConnect = this._onConnect.bind(this);
     }
 
     disconnect() {
@@ -32,7 +26,7 @@ export default class extends Controller {
         // Modify Tom Select options before initialization
         event.detail.options.onChange = (value) => {
             // Only for the symptoms select
-            if(event.target.id === 'filters_symptoms')
+            if(event.target.id === 'search_symptoms_symptoms')
             {
                 const selectedElement = this.element.querySelector(`.ts-dropdown-content [data-value="${value}"]`);
                 if (selectedElement) {
@@ -47,7 +41,6 @@ export default class extends Controller {
                         } else {
                             console.log('Element not found');
                         }
-                        this.doSearch();
                     }
                     // Else we create a new element
                     else{
@@ -59,41 +52,7 @@ export default class extends Controller {
                     console.error('Element not found for value:', value);
                 }
             }
-            else if(event.target.id === 'filters_diseases'){
-                this.diseaseId = value;
-                console.log(this.diseaseId);
-                this.doSearch();
-
-
-            }
         };
-    }
-
-    _onConnect(event) {
-        // TomSelect has been initialized
-        console.log('TomSelect instance:', event.detail.tomSelect);
-        console.log('Options used to initialize TomSelect:', event.detail.options);
-
-        const tomSelect = event.detail.tomSelect; // Get the Tom Select instance
-        if(event.target.id === 'filters_symptoms'){
-            tomSelect.on('change', () => {
-                tomSelect.setValue(''); // Clear the input
-            });
-        }
-    }
-
-    setDatePickers(){
-        const dateFrom = document.querySelector('#filters_dateFrom');
-        const dateTo = document.querySelector('#filters_dateTo');
-
-        flatpickr(dateFrom, {
-            dateFormat: "d/m/Y", // Set your desired date format
-            allowInput: true,    // Allows typing in the input
-        });
-        flatpickr(dateTo, {
-            dateFormat: "d/m/Y", // Set your desired date format
-            allowInput: true,    // Allows typing in the input
-        });
     }
 
     createSymptomListElement(id, text){
@@ -126,23 +85,17 @@ export default class extends Controller {
         return symptomDiv;
     }
 
-    setFiltersListeners(){
-        let dateTo = document.querySelector('#filters_dateTo');
-        let dateFrom = document.querySelector('#filters_dateFrom');
-        this.dateFrom = dateFrom.value;
-        this.dateTo = dateTo.value;
-        dateFrom.addEventListener('change', (e) => {
-            this.dateFrom = e.target.value;
-            console.log(this.dateFrom);
-            console.log(this.dateTo);
-            this.doSearch();
-        });
-        dateTo.addEventListener('change', (e) => {
-            this.dateTo = e.target.value;
-            console.log(this.dateFrom);
-            console.log(this.dateTo);
-            this.doSearch();
-        });
+    _onConnect(event) {
+        // TomSelect has been initialized
+        console.log('TomSelect instance:', event.detail.tomSelect);
+        console.log('Options used to initialize TomSelect:', event.detail.options);
+        
+        const tomSelect = event.detail.tomSelect; // Get the Tom Select instance
+        if(event.target.id === 'search_symptoms_symptoms'){
+            tomSelect.on('change', () => {
+                tomSelect.setValue(''); // Clear the input
+            });
+        }
     }
 
     removeSymptom(id){
@@ -153,112 +106,89 @@ export default class extends Controller {
     }
 
     /**
-     * Lance la recherche avec les filtres utilisés
+     * Fetch the form from the backend
      */
-    doSearch(){
-        const form = new FormData(); // Récupère les données du formulaire
-        form.append('dateFrom', this.dateFrom);
-        form.append('dateTo', this.dateTo);
-        form.append('diseaseId', this.diseaseId);
-        form.append('symtoms', JSON.stringify(this.symptoms));
-    
-        // Utilise fetch pour envoyer une requête GET
-        fetch('/api/filters', {
+    fetchForm() {
+        fetch('api/load-form/'+this.step)
+            /*.then(response => {
+                if (!response.ok) {
+                    throw new Error('Impossible de récupérer l\'étape suivante du formulaire');
+                }
+                return response.text();
+            })*/
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+        
+                const contentType = response.headers.get('content-type');   
+                console.log(contentType);
+                
+                if (contentType && contentType.includes('application/json')) {
+                    return response.json(); // If the content is JSON
+                } else {
+                    return response.text(); // If the content is plain text
+                }
+            })
+            .then(data => {
+                // Last step, we redirect to an URL
+                if (typeof data === 'object') {
+                    //TODO: Display "Merci pour votre contribution! and wait 5 secs before redirecting"
+                    window.location.href = data.redirectUrl;
+                // Add the HTML Form
+                } else {
+                    document.querySelector('#form-container').innerHTML = data;
+                    const form = document.querySelector('#form-container form');
+                    const submitBtn = document.querySelector('#submit-step');
+                    //We create an event listener on the "Continuer" button
+                    submitBtn.addEventListener('click', (event) => {
+                        event.preventDefault(); // Prevent default form submission
+                        this.submitForm(form);   // Call the function to submit the form
+                    });
+                }
+               
+            })
+            .catch(error => {
+                alert('There has been a problem with your fetch operation: '+error);
+            });
+    }
+
+    /**
+     * Submit the form to the controller
+     * @param {*} form 
+     */
+    submitForm(form){
+        let formData;
+        
+        if(form.getAttribute('name') === 'search_symptoms'){
+            formData = new FormData(); // Create FormData from the form
+            formData.append('symptoms', JSON.stringify(this.symptoms));
+        }
+        else{
+            formData = new FormData(form); // Create FormData from the form
+        }
+
+        fetch('api/submit-form/'+this.step, {
             method: 'POST',
-            body: form
+            body: formData,
         })
-        .then(response => response.json()) // Gère la réponse en JSON
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.error); // Get error message from JSON
+                });
+            }
+            return response.json(); // Parse the JSON response (assuming the server returns JSON)
+        })
         .then(data => {
-            console.log(data); // Traite les données de la réponse
-            this.addMarkersToMap(data);
+            console.log('Form submitted successfully:', data);
+            // Handle success (e.g., show a success message or load the next step)
+            this.step = this.step + 1;
+            this.fetchForm();
         })
         .catch(error => {
-            console.error('Erreur:', error); // Gère les erreurs
-        });
-      
-    }
-    addMarkersToMap(data) {
-        this.removeCircles();
-    
-        let map = document.querySelector('#features');
-    
-        // Function to set up the modal for the circles
-        const setupCircleEvent = (circle) => {
-            circle.addEventListener('mouseenter', (event) => {
-                event.stopPropagation(); // Prevent event bubbling
-                showModal(circle); // Show modal for the hovered circle
-            });
-    
-            circle.addEventListener('mouseleave', () => {
-                hideModal(); // Hide modal when mouse leaves the circle
-            });
-        };
-    
-        // Function to position and display the modal
-        const showModal = (circle) => {
-            const modal = document.getElementById('map-modal');
-            const circleRect = circle.getBoundingClientRect();
-            const size = parseInt(circle.getAttribute('r')); // Get radius
-            const svg = document.querySelector('svg');
-            const svgRect = svg.getBoundingClientRect();
-    
-            // Calculate the modal position based on the circle's position within the SVG
-            const modalX = circleRect.left - svgRect.left + circleRect.width / 2; // Center the modal
-            const modalY = circleRect.top - svgRect.top + circleRect.height; // Position below the circle
-    
-            console.log('Circle size: ' + size);
-    
-            // Position the modal
-            modal.style.left = `${modalX + size}px`; // Adjust position
-            modal.style.top = `${modalY}px`;
-            modal.style.display = 'block'; // Show modal
-        };
-    
-        // Function to hide the modal
-        const hideModal = () => {
-            const modal = document.getElementById('map-modal');
-            modal.style.display = 'none'; // Hide modal
-        };
-    
-        data.forEach(item => {
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    
-            // Set attributes
-            circle.setAttribute('cx', item.x);
-            circle.setAttribute('cy', item.y);
-            circle.setAttribute('r', item.pixelsSize);
-            circle.classList.add('map-circle');
-    
-            // Set color based on size
-            let color = '';
-            if(item.pixelsSize <= 20) {
-                color = 'green';
-            } else if(item.pixelsSize <= 40) {
-                color = 'orange';
-            } else {
-                color = '#ff2c2c';
-            }
-            
-            console.log(item.pixelsSize);
-            circle.setAttribute('fill', color);
-    
-            // Append the circle to the SVG map
-            map.append(circle);
-            console.log('Region:', item.name); // Assuming each item has a 'name' property
-            console.log('Report Count:', item.report_count); // Assuming each item has a 'report_count' property
-    
-            // Call the function to set up the hover event for this circle
-            setupCircleEvent(circle);
-        });
-    }
-
-    removeCircles(){
-        // Select all elements with the class 'map-circle'
-        const circles = document.querySelectorAll('.map-circle');
-
-        // Loop through the NodeList and remove each element
-        circles.forEach(circle => {
-            circle.remove(); // Remove the element from the DOM
+            //TODO modal error
+            alert('There has been a problem with your form submission: ' + error.message);
         });
     }
 }

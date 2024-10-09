@@ -14,10 +14,12 @@
                         {#TODO: current page#}
                         <a class="nav-link {{ path('app_map') == url ? 'nav-active' : '' }}" aria-current="page" href="{{ path('app_map') }}">Carte des clusters</a>
                     </li>
+                    {% if app.user %}
                     <span class="dot-separator"></span>
-                    <li class="nav-item">
-                        <a class="nav-link {{ path('app_form') == url ? 'nav-active' : '' }}" href="{{ path('app_form') }}">Déclarer des symptômes</a>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ path('app_form') == url ? 'nav-active' : '' }}" href="{{ path('app_form') }}">Déclarer des symptômes</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 {% if app.user is null %}
                     <a href="{{ path('connect_google_start') }}" class="oauth_button">

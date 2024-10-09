@@ -3,6 +3,11 @@
 header{
     height: 100%;
     .navbar{
+        .navbar-collapse{
+            z-index: 1;
+            background-color: #F8F9FA;
+            padding: 20px;
+        }
         height: 125px;
         padding: 0 20px;
         .navbar-brand{

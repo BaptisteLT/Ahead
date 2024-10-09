@@ -6,6 +6,7 @@ use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use App\Module\ConditionModule\Repository\ReportRepository;
 use App\Module\MapModule\Entity\Department;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 
@@ -24,16 +25,13 @@ class Report
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'reports')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Disease $disease = null;
 
     #[ORM\ManyToOne(targetEntity: Department::class, inversedBy: 'reports')]
     #[ORM\JoinColumn(nullable: false)] // Not nullable to ensure every report has a department
     private ?Department $department = null;
 
-    /**
-     * @var Collection<int, Symptoms>
-     */
     #[ORM\ManyToMany(targetEntity: Symptoms::class, inversedBy: 'reports')]
     private Collection $symptoms;
 
@@ -41,15 +39,33 @@ class Report
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $dateReport = null;
     
-    private function getDateReport(): ?\DateTimeImmutable{
+    public function __construct() {
+        $this->symptoms = new ArrayCollection();
+    }
+
+    
+    #[ORM\Column(nullable: true)]
+    private ?bool $hasAcceptedRgpd = null;
+    
+    public function getHasAcceptedRgpd(): ?bool{
+        return $this->hasAcceptedRgpd;
+    }
+    
+    public function setHasAcceptedRgpd(?bool $hasAcceptedRgpd): static{
+        $this->hasAcceptedRgpd = $hasAcceptedRgpd;
+    
+        return $this;
+    }
+    public function getDateReport(): ?\DateTimeImmutable{
         return $this->dateReport;
     }
     
-    private function setDateReport(?\DateTimeImmutable $dateReport): static{
+    public function setDateReport(?\DateTimeImmutable $dateReport): static{
         $this->dateReport = $dateReport;
     
         return $this;
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,23 +118,18 @@ class Report
     {
         return $this->symptoms;
     }
-
-    public function addSymptom(Symptoms $symptom): static
-    {
+    public function addSymptom(Symptoms $symptom): static {
         if (!$this->symptoms->contains($symptom)) {
             $this->symptoms->add($symptom);
-            $symptom->addReport($this);
+            $symptom->addReport($this); // Maintain the inverse relationship
         }
-
         return $this;
     }
 
-    public function removeSympton(Symptoms $symptom): static
-    {
+    public function removeSymptom(Symptoms $symptom): static {
         if ($this->symptoms->removeElement($symptom)) {
-            $symptom->removeReport($this);
+            $symptom->removeReport($this); // Maintain the inverse relationship
         }
-
         return $this;
     }
 }

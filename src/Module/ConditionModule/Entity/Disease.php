@@ -4,6 +4,7 @@ namespace App\Module\ConditionModule\Entity;
 use App\Entity\Trait\CreateUpdateTrait;
 use Doctrine\ORM\Mapping as ORM;
 use App\Module\ConditionModule\Repository\DiseaseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: DiseaseRepository::class)]
@@ -24,6 +25,11 @@ class Disease
      */
     #[ORM\OneToMany(targetEntity: Report::class, mappedBy: 'disease', orphanRemoval: true)]
     private Collection $reports;
+
+    public function __construct()
+    {
+        $this->reports = new ArrayCollection();
+    }
 
     public function getName(): ?string
     {

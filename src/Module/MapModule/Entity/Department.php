@@ -103,4 +103,9 @@ class Department
         $this->region = $region;
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->name . ' (' . $this->number . ')';
+    }
 }

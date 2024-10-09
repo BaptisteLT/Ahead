@@ -1,0 +1,11 @@
+{# templates/form/_form.html.twig #}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button id="submit-step" type="button" class="btn btn-primary">Continuer</button>
+    <div id="symptoms_list">
+        {#<div class="symptom" data-id="7">
+            <span class="symptom-name">Fièvre</span>
+            <button type="button">Supprimer</button>
+        </div>#}
+    </div>
+{{ form_end(form) }}
