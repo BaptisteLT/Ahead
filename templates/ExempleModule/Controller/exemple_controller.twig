@@ -15,7 +15,7 @@ class {{ className }} extends BootController
     #[Route('/{{ route }}', name: 'app_{{ route }}', methods: ['GET'])]
     public function index(): Response
     {
-        $this->addBreadcrumb('Home', '/');
+        $this->addBreadcrumb('Accueil', '/');
         $this->addBreadcrumb('{{ route }}', null);
 
         return $this->render('index.html.twig', [

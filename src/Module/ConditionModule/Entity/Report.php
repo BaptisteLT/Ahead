@@ -38,7 +38,7 @@ class Report
     private Collection $symptoms;
 
     
-    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     private ?\DateTimeImmutable $dateReport = null;
     
     private function getDateReport(): ?\DateTimeImmutable{

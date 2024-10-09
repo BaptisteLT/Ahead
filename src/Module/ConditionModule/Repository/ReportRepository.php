@@ -39,4 +39,35 @@ class ReportRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findByFilters($dateFrom, $dateTo, $diseaseId, $symptoms): array
+    {
+        $dateFrom = $dateFrom->format('Y-m-d');
+        $dateTo = $dateTo->format('Y-m-d');
+        $conn = $this->getEntityManager()->getConnection();
+        $params = [];
+    
+        // Base SQL query
+        $sql = '
+            SELECT COUNT(report.id) as countReports, region.nb_residents as nbResidents, region.name, region.latitude, region.longitude
+            FROM region
+            LEFT JOIN department ON department.region_id = region.id
+            LEFT JOIN report ON report.department_id = department.id
+        ';
+    
+        // Add disease filter in the ON clause to preserve LEFT JOIN behavior
+        if ($diseaseId !== null) {
+            $sql .= ' AND report.disease_id = :diseaseId';
+            $params['diseaseId'] = $diseaseId;
+        }
+    
+        // Add the GROUP BY clause
+        $sql .= ' GROUP BY region.id';
+    
+        // Execute the query with the parameters
+        $resultSet = $conn->executeQuery($sql, $params);
+    
+        // Return the result set as an associative array
+        return $resultSet->fetchAllAssociative();
+    }
 }

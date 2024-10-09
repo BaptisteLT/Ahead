@@ -13,12 +13,22 @@ class MapService
 
     public function setCoordinates(Region &$region): Region
     {
-        $x = (($region->getLongitude() + 5.1) / (9.5 + 5.1)) * self::SVG_WIDTH;
-        $y = self::SVG_HEIGHT - (($region->getLatitude() - 41.3) / (51.1 - 41.3)) * self::SVG_HEIGHT;
+        $x = $this->calculateX($region->getLongitude());
+        $y = $this->calculateY($region->getLatitude());
         $region->setSvgY($y);
         $region->setSvgX($x);
     
         // You must return the region object
         return $region;
     }
+
+    public function calculateX($longitude){
+        return (($longitude + 5.1) / (9.5 + 5.1)) * self::SVG_WIDTH;
+    }
+
+    public function calculateY($latitude){
+        return self::SVG_HEIGHT - (($latitude - 41.3) / (51.1 - 41.3)) * self::SVG_HEIGHT;
+    }
+
+
 }
