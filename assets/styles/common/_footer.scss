@@ -1,5 +1,9 @@
 @use './vars' as vars;
 
+.social-logo{
+    width: 50px;
+}
+
 footer{
     .footer_top{
         background-color: vars.$blue_1;
@@ -13,12 +17,19 @@ footer{
                 color: vars.$white;
             }
             .footer-col{
+                .partners-wrapper{
+                    max-width: 550px;
+                }
                 ul{
                     color: vars.$white;
                     margin: 0; 
                     padding: 0;
                     list-style: none;
                     font-size: 1.4rem;
+                    a{
+                        color: vars.$white;
+                        text-decoration: none;
+                    }
                 }
             }
         }

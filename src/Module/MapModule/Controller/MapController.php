@@ -53,9 +53,10 @@ class MapController extends BootController
 
         $reports = $reportRepository->findByFilters($dateFrom, $dateTo, $diseaseId, $symptoms);
     
-        //TODO: Mettre la logique dans le service
+        
         $maxNumber = 0;
         foreach($reports as $key => $report){
+            //Adapté en fonction du nombre d'habitants pour avoir une cohérence
             $number = ($report['countReports']*100)/$report['nbResidents'];
             if($number > $maxNumber){
                 $maxNumber = $number;
@@ -64,7 +65,7 @@ class MapController extends BootController
         }
         
         foreach($reports as $key => $report){
-            
+            //Calcul de la taille du rond (max 60, min 15)
             if($maxNumber !== 0){
                 $reports[$key]['pixelsSize'] = (int)(($report['number'] / $maxNumber) * self::MAX_PIXELS_RADIUS);
             }else{

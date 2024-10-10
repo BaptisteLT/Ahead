@@ -29,7 +29,7 @@ class ConditionController extends BootController
         protected SiteMapService $siteMapService
     ){}
 
-    #[IsGranted('IS_AUTHENTICATED_FULLY')] //TODO: config /connect route
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route('/form', name: 'app_form', methods: ['GET'])]
     public function indexForm(): Response
     {
@@ -77,7 +77,7 @@ class ConditionController extends BootController
         if($step === 7){
 
             $report = new Report();
-            $report->setUser($this->getUser());//TODO: bug user qui se déconnecte
+            $report->setUser($this->getUser());
             if($session->has('disease')){
                 $report->setDisease($diseaseRepository->find($session->get('disease')));
             }

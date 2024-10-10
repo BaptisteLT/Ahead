@@ -3,30 +3,39 @@
         <div class="container">
             <div class="footer-row">
                 <div class="footer-col mt-5 mb-5">
-                    <h3>Lorem ipsum</h3>
+                    <h3>Navigation</h3>
                     <ul>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
+                        <li><a href="{{ path('app_map') }}">Carte des clusters</a></li>
+                        <li><a href="{{ path('app_form') }}">Déclarer mes symptômes</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col mt-5 mb-5">
-                    <h3>Lorem ipsum</h3>
-                    <ul>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                    </ul>
+                    <h3 class="mb-4">Nos partenaires</h3>
+                    <div class="row partners-wrapper">
+                        <div class="col-4">
+                            <img class="img-fluid" alt="Logo partenaire Pro Alterna" src="{{ asset('logos/logo-proalterna.png') }}" />
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid" alt="Logo partenaire Pro Epsi" src="{{ asset('logos/logo-epsi.png') }}" />
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid" alt="Logo partenaire Wis" src="{{ asset('logos/logo-wis.png') }}" />
+                        </div>
+                    </div>
+                   
                 </div>
 
                 <div class="footer-col mt-5 mb-5">
-                    <h3>Lorem ipsum</h3>
-                    <ul>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                        <li>Lorem ipsum</li>
-                    </ul>
+                    <h3 class="mb-4">Retrouvez-nous</h3>
+                    <div class="row">
+                        <div class="col-4">
+                            <img class="img-fluid social-logo" alt="Logo Linkedin" src="{{ asset('icons/linkedin.png') }}" />
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid social-logo" alt="Logo X (anciennement Twitter)" src="{{ asset('icons/x.png') }}" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
