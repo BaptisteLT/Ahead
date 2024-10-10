@@ -135,7 +135,7 @@ class ConditionController extends BootController
                 $isDiseaseDiagnosed = (int)$request->request->all()['disease_diagnosed']['diagnosed'];
             }
             catch(Exception $e){
-                return new JsonResponse(['error'=>'Requête invalide.'], 400);
+                return new JsonResponse(['error'=>'Le choix Oui/Non est requis.'], 400);
             }
             
             if(($isDiseaseDiagnosed <> 1 && $isDiseaseDiagnosed <> 0)){
@@ -148,12 +148,12 @@ class ConditionController extends BootController
                 $diseaseId = (int)$request->request->all()['search_disease']['diseases'];
             }
             catch(Exception $e){
-                return new JsonResponse(['error'=>'Requête invalide.'], 400);
+                return new JsonResponse(['error'=>'Une maladie est requise.'], 400);
             }
             
             $disease = $diseaseRepository->find($diseaseId);
             if(!$disease){
-                return new JsonResponse(['error'=>'Requête invalide.'], 400);
+                return new JsonResponse(['error'=>'Cette maladie n\'existe pas.'], 400);
             }
             else{
                 $session->set('disease', $diseaseId);
@@ -184,12 +184,12 @@ class ConditionController extends BootController
                 $departmentId = (int)$request->request->all()['department']['department'];
             }
             catch(Exception $e){
-                return new JsonResponse(['error'=>'Requête invalide.'], 400);
+                return new JsonResponse(['error'=>'Le département est requis.'], 400);
             }
             
             $department = $departmentRepository->find($departmentId);
             if(!$department){
-                return new JsonResponse(['error'=>'Requête invalide.'], 400);
+                return new JsonResponse(['error'=>'Le département est requis.'], 400);
             }
             else{
                 $session->set('department', $departmentId);
@@ -200,7 +200,7 @@ class ConditionController extends BootController
                 $hasAgreedRgpd = (int)$request->request->all()['rgpd']['agreeTerms'];
             }
             catch(Exception $e){
-                return new JsonResponse(['error'=>'Requête invalide.'], 400);
+                return new JsonResponse(['error'=>'Il est obligatoire d\'accepter les conditions avant de continuer.'], 400);
             }
             if(empty($hasAgreedRgpd)){
                 return new JsonResponse(['error'=>'Il est obligatoire d\'accepter les conditions avant de continuer.'], 400);

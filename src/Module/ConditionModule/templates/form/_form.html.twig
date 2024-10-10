@@ -1,11 +1,22 @@
 {# templates/form/_form.html.twig #}
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button id="submit-step" type="button" class="btn btn-primary">Continuer</button>
-    <div id="symptoms_list">
-        {#<div class="symptom" data-id="7">
-            <span class="symptom-name">Fièvre</span>
-            <button type="button">Supprimer</button>
-        </div>#}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card mt-4 mb-5">
+                <div class="card-body">
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <div id="symptoms_list">
+                            {# Sample symptom item, uncomment and modify as needed #}
+                            {# <div class="symptom" data-id="7">
+                                <span class="symptom-name">Fièvre</span>
+                                <button type="button" class="btn btn-danger btn-sm">Supprimer</button>
+                            </div> #}
+                        </div>
+                        <button id="submit-step" type="button" class="mt-4 button-large button-large-blue">Continuer</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
     </div>
-{{ form_end(form) }}
+</div>

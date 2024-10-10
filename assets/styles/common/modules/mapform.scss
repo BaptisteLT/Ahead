@@ -1,35 +1,37 @@
 @use '../vars' as vars;
 
+
+#symptoms_list{
+    .symptom{
+        width: 100%;
+        padding: 4px;
+        border-left: 1px solid vars.$border_color;
+        border-right: 1px solid vars.$border_color;
+        border-bottom: 1px solid vars.$border_color;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .symptom-name{
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        button{
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 8px;
+            color: vars.$white;
+            border: 0;
+            background-color: #ff3737;
+        }
+    }
+}
+
 .filters_wrapper{
     margin-bottom: 189px;
     margin-top: 150px;
     h2{
         font-size: 1.8rem;
-    }
-    #symptoms_list{
-        .symptom{
-            width: 100%;
-            padding: 4px;
-            border-left: 1px solid vars.$border_color;
-            border-right: 1px solid vars.$border_color;
-            border-bottom: 1px solid vars.$border_color;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .symptom-name{
-                font-weight: bold;
-                margin-left: 5px;
-            }
-            button{
-                text-decoration: none;
-                justify-content: center;
-                align-items: center;
-                padding: 6px 12px;
-                border-radius: 8px;
-                color: vars.$white;
-                border: 0;
-                background-color: #ff3737;
-            }
-        }
     }
 }

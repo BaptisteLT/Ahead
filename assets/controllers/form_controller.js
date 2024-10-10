@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import Swal from 'sweetalert2';
 
 export default class extends Controller {
 
@@ -118,7 +119,7 @@ export default class extends Controller {
             })*/
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    this.displayErrorModal('Une erreur est survenue');
                 }
         
                 const contentType = response.headers.get('content-type');   
@@ -133,8 +134,12 @@ export default class extends Controller {
             .then(data => {
                 // Last step, we redirect to an URL
                 if (typeof data === 'object') {
-                    //TODO: Display "Merci pour votre contribution! and wait 5 secs before redirecting"
-                    window.location.href = data.redirectUrl;
+                    //Afficher un message et attendre 5 secondes avant de rediriger l'utilisateur
+                    document.querySelector('#form-container').innerHTML = '<h1 class="text-center mb-5">Merci vous votre contribution!</h1>';
+                    setTimeout(() => {
+                        window.location.href = data.redirectUrl;
+                    }, 3000)
+                    
                 // Add the HTML Form
                 } else {
                     document.querySelector('#form-container').innerHTML = data;
@@ -149,7 +154,8 @@ export default class extends Controller {
                
             })
             .catch(error => {
-                alert('There has been a problem with your fetch operation: '+error);
+                this.displayErrorModal(error);
+                //alert('There has been a problem with your fetch operation: '+error);
             });
     }
 
@@ -188,7 +194,16 @@ export default class extends Controller {
         })
         .catch(error => {
             //TODO modal error
-            alert('There has been a problem with your form submission: ' + error.message);
+            this.displayErrorModal(error.message);
+            //alert('There has been a problem with your form submission: ' + error.message);
         });
+    }
+    displayErrorModal(error){
+        Swal.fire({
+            title: 'Erreur',
+            text: error,
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          })
     }
 }
