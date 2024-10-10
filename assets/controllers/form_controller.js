@@ -135,7 +135,7 @@ export default class extends Controller {
                 // Last step, we redirect to an URL
                 if (typeof data === 'object') {
                     //Afficher un message et attendre 5 secondes avant de rediriger l'utilisateur
-                    document.querySelector('#form-container').innerHTML = '<h1 class="text-center mb-5">Merci vous votre contribution!</h1>';
+                    document.querySelector('#form-container').innerHTML = '<h1 class="text-center mb-5">Merci pour votre contribution!</h1>';
                     setTimeout(() => {
                         window.location.href = data.redirectUrl;
                     }, 3000)
