@@ -39,8 +39,3 @@ https://www.canva.com/design/DAGS4RGKyuA/DvIejtJ1hC-v5E_jo9-s7Q/edit?utm_content
 
 ## Pistes d'amélioration pour l'application
 1) Ajouter des synonymes des maladies/symtômes pour simplifier la recherche de l'utilisateur. Par exemple "maux de tête", "mal de tête", "douleur à la tête", etc.
-
-
-
-
-TODO: expliquer comment config OAuth2 google en local
