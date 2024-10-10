@@ -232,11 +232,14 @@ export default class extends Controller {
             // Set color based on size
             let color = '';
             if(item.pixelsSize <= 20) {
-                color = 'green';
+                // Green
+                color = '#28a745CC';
             } else if(item.pixelsSize <= 40) {
-                color = 'orange';
+                // Orange
+                color = '#ff7e1bCC';
             } else {
-                color = '#ff2c2c';
+                // Red
+                color = '#ff2c2cCC';
             }
             
             console.log(item.pixelsSize);
