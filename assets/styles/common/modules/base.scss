@@ -40,6 +40,10 @@
     .speech{
         padding: 40px 30px 30px 30px;
         border-radius: 8px;
+        width: 50%;
+        @media screen and (max-width: 1200px){
+            width: 100%;
+        }
     }
     .speech-left{
         background-color: vars.$blue_2;
