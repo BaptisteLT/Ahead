@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vous inscrire{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Vous inscrire</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        {{ form_errors(registrationForm) }}
+
+                        {{ form_start(registrationForm) }}
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.email, {
+                                    'label_attr': {'class': 'form-label'},
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_row(registrationForm.plainPassword, {
+                                    label: 'Password',
+                                    'label_attr': {'class': 'form-label'},
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="form-check mb-3">
+                                {{ form_row(registrationForm.agreeTerms, {
+                                    'label_attr': {'class': 'form-check-label'},
+                                    'attr': {'class': 'form-check-input'}
+                                }) }}
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">S'inscrire</button>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

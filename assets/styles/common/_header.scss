@@ -12,19 +12,18 @@ header{
         padding: 0 20px;
         .navbar-brand{
             color: vars.$blue_1;
-            font-size: 4.7rem;
+            font-size: 4rem;
             font-weight: bold;
             font-family: "Open Sans", sans-serif;
         }
         ul{
             align-items: center;
             li{
-                font-size: 1.6rem;
+                font-size: 1.5rem;
                 color: vars.$black;
                 &:hover{
                     a{
                         color: vars.$blue_1;
-                        transform: scale(1.01);
                     }
     
                 }

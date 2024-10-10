@@ -246,6 +246,7 @@ class MapFixtures extends Fixture
                 $departmentEntity->setNumber((int)$department['number'])
                            ->setName($department['name'])
                            ->setRegion($regionEntity);
+                $this->addReference('Department'.$department['number'], $departmentEntity);
                 $manager->persist($departmentEntity);
             }
 

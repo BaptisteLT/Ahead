@@ -19,6 +19,18 @@ security:
             
             custom_authenticators:
                 - App\Security\Authenticator\GoogleAuthenticator
+
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                enable_csrf: true
+
+            entry_point: form_login  # Specify your entry point here
+
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 

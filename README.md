@@ -5,3 +5,7 @@
 
 TODO: diviser le nombre de maladies par le nombre d'habitants
 TODO: pour la recherche des maladies et symptômes, ajouter des synonymes pour simplifier la recherche (ex, maux de tête, mal de tête, douleur tête, etc)
+
+TODO: comment installer le projet (bdd, symfony serve, fixturesn composer install, npm run watch)
+TODO: lien vidéo youtube vers la présentation
+TODO: expliquer comment config OAuth2 google en local
