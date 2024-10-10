@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% include '@ProfileModule/components/_nav.html.twig' %}
+            
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="justify-content-between align-items-center pt-3 pb-2 mb-3">
+                    <h1 class="h1 m-0">Mes données</h1>
+
+                    {# Btn to open the modal #}
+                    <button type="button" class="btn btn-danger mt-4" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                        Supprimer mon compte
+                    </button>
+
+                    {# Confirmation modal #}
+                    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteAccountModalLabel">Confirmer la suppression</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Êtes-vous sûr de vouloir supprimer votre compte et toutes les données associées ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <form method="POST" action="{{ path('app_delete_account') }}">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
+                                        <button type="submit" class="btn btn-danger">Supprimer mon compte</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}

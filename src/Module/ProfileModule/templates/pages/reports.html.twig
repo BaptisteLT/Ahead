@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            {% include '@ProfileModule/components/_nav.html.twig' %}
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mb-5">
+                <h1 class="h1 m-0">Mes déclarations</h1>
+
+                {% if reports is not empty %}
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Maladie</th>
+                                <th>Département</th>
+                                <th>Symptômes</th>
+                                <th>Début des symtômes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for report in reports %}
+                                <tr>
+                                    <td>{{ report.disease ? report.disease.name : 'Non diagnostiquée' }}</td>
+                                    <td>{{ report.department.name }}</td>
+                                    <td>
+                                        {% if report.symptoms is not empty %}
+                                            <ul>
+                                                {% for symptom in report.symptoms %}
+                                                    <li>{{ symptom.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% else %}
+                                            N/A
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ report.dateReport ? report.dateReport|date('d/m/Y') : 'N/A' }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="card mt-4 mb-4">
+                            <div class="card-body">
+                                <p class="text-center m-0">A ce jour, vous n'avez fait aucune déclaration de maladie ou symtômes.</p>
+                            </div>
+                        </div>
+                {% endif %}
+            </main>
+
+        </div>
+    </div>
+
+{% endblock %}

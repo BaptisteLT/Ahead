@@ -1,5 +1,4 @@
 <?php
-// src/Service/TwigPathLoader.php
 namespace App\Service;
 
 use Twig\Environment;
@@ -10,7 +9,6 @@ class TwigPathLoader
 {
     private $twig;
     private $params;
-    private $module = [];
 
     public function __construct(Environment $twig, ParameterBagInterface $params)
     {
@@ -30,13 +28,16 @@ class TwigPathLoader
     public function registerModuleTemplates(): void
     {
         $moduleDir = $this->params->get('kernel.project_dir') . '/src/Module';
-        $moduleTemplates = glob($moduleDir . '/*/templates');
+        $modules = glob($moduleDir . '/*');
 
-        
-
-        foreach ($moduleTemplates as $modulePath) {
-            $moduleName = basename(str_replace('templates', '', $modulePath));
-            $this->twig->getLoader()->addPath($modulePath, $moduleName);
+        foreach ($modules as $modulePath) {
+            if (is_dir($modulePath)) {
+                $templatesPath = $modulePath . '/templates';
+                if (is_dir($templatesPath)) {
+                    // Register all template directories
+                    $this->twig->getLoader()->addPath($templatesPath, basename($modulePath));
+                }
+            }
         }
     }
 
@@ -46,12 +47,12 @@ class TwigPathLoader
     public function registerHooksTemplates(): void
     {
         $moduleDir = $this->params->get('kernel.project_dir') . '/src/Module';
-        
         $hooksTemplatesPath = glob($moduleDir . '/*/Hooks/*/templates');
-        
+
         foreach ($hooksTemplatesPath as $hookPath) {
-            $hookName = basename(str_replace('templates', '', $hookPath));
-            $this->twig->getLoader()->addPath($hookPath, $hookName);
+            if (is_dir($hookPath)) {
+                $this->twig->getLoader()->addPath($hookPath, basename(dirname($hookPath))); // Register the hook path
+            }
         }
     }
 }

@@ -56,7 +56,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->reports = new ArrayCollection();
-        $this->manyToMany = new ArrayCollection();
     }
 
     public function getId(): ?int
