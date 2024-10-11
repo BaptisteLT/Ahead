@@ -48,8 +48,8 @@ class MapController extends BootController
         }
 
         $today = new \DateTime();
-        $dateFrom = (empty($dateFrom) ? (clone $today)->modify('-1 month') : new \DateTime($dateFrom));
-        $dateTo = (empty($dateTo) ? $today : new \DateTime($dateTo));
+        $dateFrom = (empty($dateFrom) ? (clone $today)->modify('-1 month') : \DateTime::createFromFormat('d/m/Y', $dateFrom));
+        $dateTo = (empty($dateTo) ? $today : \DateTime::createFromFormat('d/m/Y', $dateTo));
 
         $reports = $reportRepository->findByFilters($dateFrom, $dateTo, $diseaseId, $symptoms);
     

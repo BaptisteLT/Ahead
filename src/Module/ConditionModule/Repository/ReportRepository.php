@@ -52,7 +52,8 @@ class ReportRepository extends ServiceEntityRepository
             SELECT COUNT(report.id) as countReports, region.nb_residents as nbResidents, region.name, region.latitude, region.longitude
             FROM region
             LEFT JOIN department ON department.region_id = region.id
-            LEFT JOIN report ON report.department_id = department.id
+                LEFT JOIN report ON report.department_id = department.id 
+        AND report.date_report > :dateFrom AND report.date_report < :dateTo
         ';
     
         // Add disease filter in the ON clause to preserve LEFT JOIN behavior
@@ -64,6 +65,15 @@ class ReportRepository extends ServiceEntityRepository
         // Add the GROUP BY clause
         $sql .= ' GROUP BY region.id';
     
+  
+        // Add date parameters
+        $params['dateFrom'] = $dateFrom;
+        $params['dateTo'] = $dateTo;
+
+        //dump($sql);
+        //dump($params);die;
+        
+
         // Execute the query with the parameters
         $resultSet = $conn->executeQuery($sql, $params);
     
