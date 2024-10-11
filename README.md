@@ -28,7 +28,8 @@ Il faut par la suite paramétrer les URI de redirection autorisées en ajoutant 
 - [Lien du support de présentation](https://www.canva.com/design/DAGTP2PhiCo/yACVFYpQjOsOjOmYXLcHNw/edit?utm_content=DAGTP2PhiCo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ### Vidéo de présentation
-TODO
+- Retrouvez la vidéo de présentation sur notre chaîne:
+[Lien de la chaîne Youtube](https://www.youtube.com/channel/UCEPUnRPg9I4EbHibCyMoRpA)
 
 ### Cahier des charges
 - Se trouve à la racine du projet dans le dossier "documents".
