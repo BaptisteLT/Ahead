@@ -23,22 +23,25 @@ Il faut par la suite paramétrer les URI de redirection autorisées en ajoutant 
 3) Une fois l'ajout du client OAuth terminé, vous devez ajouter un utilisateur de test dans l'onglet à gauche "Ecran de consentement OAuth". Cliquez sur "Add Users" et saisissez l'adresse de votre compte gmail.
 
 ## Livrables
-### Vidéo "Preuve de concept"
-TODO
 
 ### Support de présentation
 TODO
 
 ### Vidéo de présentation
 TODO
+
 ### Cahier des charges
-TODO
+- Se trouve à la racine du projet dans le dossier "documents".
+
+### Kanban/Gantt
+- Se trouve à la racine du projet dans le dossier "documents/gestion_de_projet".
 
 ### Maquette
-https://www.canva.com/design/DAGS4RGKyuA/DvIejtJ1hC-v5E_jo9-s7Q/edit?utm_content=DAGS4RGKyuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+- [Lien vers la maquette](https://www.canva.com/design/DAGS4RGKyuA/DvIejtJ1hC-v5E_jo9-s7Q/edit?utm_content=DAGS4RGKyuA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ## Pistes d'amélioration pour l'application
 1) Ajouter des synonymes des maladies/symtômes pour simplifier la recherche de l'utilisateur. Par exemple "maux de tête", "mal de tête", "douleur à la tête", etc.
-
-## Fonctionalités à ajouter
-1) Partie "Mon profil" pour avoir accès à son historique de rapports, accès aux données personnelles et la suppression du compte et des données personnelles
+2) Tester l'application en profondeur avec l'application NVDA, qui donne des informations avec une voix synthétique et/ou en Braille pour les personnes mal/non voyantes.
+3) Pouvoir ajouter de nouvelles maladies si elles n'existent pas dans la liste. Si la maladie est recensée par 5 utilisateurs différents, elle est ajoutée à la base de données. L'écriture de la maladie peut être différente (Covid, covid19, Covid-19, etc), il faudra donc une IA qui rassemblera ces mots en un seul.
+4) Avoir un compte "Pro" pour les professionnels de santé, afin d'avoir des informations vérifiées.
+5) Terminer la gestion des cookies.
