@@ -202,6 +202,9 @@ export default class extends Controller {
             const svg = document.querySelector('svg');
             const svgRect = svg.getBoundingClientRect();
     
+            modal.innerHTML = '<div>Région: ' + circle.dataset.region + '</div><br/><div>Nombre de cas: ' + circle.dataset.countreports + '</div>';
+
+
             // Calculate the modal position based on the circle's position within the SVG
             const modalX = circleRect.left - svgRect.left + circleRect.width / 2; // Center the modal
             const modalY = circleRect.top - svgRect.top + circleRect.height; // Position below the circle
@@ -223,10 +226,13 @@ export default class extends Controller {
         data.forEach(item => {
             const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     
+            console.log(item)
             // Set attributes
             circle.setAttribute('cx', item.x);
             circle.setAttribute('cy', item.y);
             circle.setAttribute('r', item.pixelsSize);
+            circle.setAttribute('data-countreports', item.countReports)
+            circle.setAttribute('data-region', item.name)
             circle.classList.add('map-circle');
     
             // Set color based on size
