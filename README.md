@@ -25,7 +25,7 @@ Il faut par la suite paramétrer les URI de redirection autorisées en ajoutant 
 ## Livrables
 
 ### Support de présentation
-TODO
+- [Lien du support de présentation](https://www.canva.com/design/DAGTP2PhiCo/yACVFYpQjOsOjOmYXLcHNw/edit?utm_content=DAGTP2PhiCo&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ### Vidéo de présentation
 TODO
